@@ -539,7 +539,81 @@ nav .gnb_menu_list:nth-of-type(5) .gnb_dropMenu_wrap {
 .content_summary .stock2{
   font-size:18px;
 }
-/* .main_content .content_service{}
+
+
+/* .main_content .content_service{}*/
+.main_content .content_service{} 
+.service_list_container{
+  display: flex;
+  /* 플렉스 아이템의 줄바꿈 */
+  flex-wrap: wrap;
+
+}
+/* 단(colum)의 크기는 플렉스아이템 */
+li.service_thumbnail_box{
+  /* flex-basis:33.333% ; flex-grow: 0; flex-shrink: 1; 
+  flex: 0 1 33.33%
+  플렉스아이템의 후손의 크기가 플렉스 아이템보다 클경우를 생각해서 
+  flex-direction:row 일 경우 width 지정
+  flex-direction:column 일 경우 height 지정
+  flex-baseis 만 지정할 경우 크기가 안맞을 수 있음
+  */
+  width: 33.33%;
+  box-sizing: border-box; /*기억용*/
+  background-color: #ccc;/*작업 후 삭제*/
+  border: 1px solid #f00;/*작업 후 삭제*/
+  overflow: hidden;
+}
+li.service_thumbnail_box a.thumbnail_dimmed{
+  position: relative;
+  color: #fff;
+}
+li.service_thumbnail_box .thumbnail{}
+li.service_thumbnail_box .thumbnail img{}
+li.service_thumbnail_box .description{
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -300px; /*모든 font 크기 지정후 위치 조정*/
+  transition: bottom 0.5s;
+  padding:50px 30px 30px;
+  /* 배경이미지 아이콘이 별도로 작업했다면 */
+  /* background:no-repeat url(../img/main/play_circle_FILL0_wght700_GRAD0_opsz48.png)
+  30px 0px; */
+  background:no-repeat url(../img/sprite.png)
+  30px 0px;
+  /* 배경이미지 크기 지정 */
+  /* background-size: 30px 30px; */
+}
+li.service_thumbnail_box .description:hover{
+  bottom: 0px;
+}
+
+li.service_thumbnail_box  .description:after{
+  content: '';
+  display: block;
+  position: absolute;
+  left: 30px;
+  top: 0px;
+  width: 23px; height: 23px;
+  background-color: #f00;
+  background:no-repeat url(../img/sprite.png); 
+  background-position: -199px -129px;
+  
+}
+
+li.service_thumbnail_box  .description .title_text{
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+li.service_thumbnail_box  .description .desc_text{
+  font-size: 18px;
+  /* 한줄 말줄임표 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .main_content .content_support{} */
 
 /************ 
