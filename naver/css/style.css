@@ -437,13 +437,27 @@ nav .gnb_menu_list:nth-of-type(5) .gnb_dropMenu_wrap {
   align-content: stretch; */
 }
 .content_summary .summary_container{
+  position: relative;
   flex-basis: 25%;
   width:25%;
   /* flex-grow: 0;
   flex-shrink: 1; */
-  border: 1px solid #f00;
-  padding-right:50px;
+  padding:0 50px;
 }
+.content_summary .summary_container:after{
+  content: '';
+  position: absolute;
+  right: 0; top: 0;
+  width: 1px; height: 100%;
+  background-color: #e5e5e5;
+  }
+  .content_summary .summary_container:first-child::after{
+    padding-left: 0;
+  }
+  .content_summary .summary_container:last-child::after{
+   display: none;
+  }
+
 .content_summary  h3.summary_title{
   /* font-family: 'Nanum Gothic', sans-serif; */
   font-size: 14px;
@@ -509,7 +523,7 @@ nav .gnb_menu_list:nth-of-type(5) .gnb_dropMenu_wrap {
   background-position: -108px -49px;
 }
 .content_summary .news{}
-.content_summary .career{
+.content_summary .career .text_wrap{
   font-size:18px;
 }
 .content_summary .stock1{}
@@ -536,85 +550,258 @@ nav .gnb_menu_list:nth-of-type(5) .gnb_dropMenu_wrap {
 }
 
 
-.content_summary .stock2{
+.content_summary .stock2 .text_wrap{
   font-size:18px;
 }
 
 
-/* .main_content .content_service{}*/
-.main_content .content_service{} 
-.service_list_container{
+/* .content_service */
+ .main_content .content_service{
+  margin-top:150px
+ }
+ .service_list_container{
   display: flex;
   /* 플렉스 아이템의 줄바꿈 */
   flex-wrap: wrap;
-
-}
-/* 단(colum)의 크기는 플렉스아이템 */
-li.service_thumbnail_box{
-  /* flex-basis:33.333% ; flex-grow: 0; flex-shrink: 1; 
-  flex: 0 1 33.33%
-  플렉스아이템의 후손의 크기가 플렉스 아이템보다 클경우를 생각해서 
-  flex-direction:row 일 경우 width 지정
-  flex-direction:column 일 경우 height 지정
-  flex-baseis 만 지정할 경우 크기가 안맞을 수 있음
+ }
+ /* 단(column)의 크기는 플렉스아이템 */
+ li.service_thumbnail_box{
+  /* flex-basis: 33.33%; */
+  /* flex:0 1 33.33%; */
+  /* 플렉스 아이템의 후손의 크기가 플렉스 아이템보다 클경우를 생각해서   
+  flex-direction:row경우 width 지정
+  flex-direction:column경우 height 지정
   */
-  width: 33.33%;
-  box-sizing: border-box; /*기억용*/
-  background-color: #ccc;/*작업 후 삭제*/
-  border: 1px solid #f00;/*작업 후 삭제*/
+  width:33.33%; 
+  box-sizing: border-box;
   overflow: hidden;
-}
-li.service_thumbnail_box a.thumbnail_dimmed{
-  position: relative;
-  color: #fff;
-}
-li.service_thumbnail_box .thumbnail{}
-li.service_thumbnail_box .thumbnail img{}
-li.service_thumbnail_box .description{
-  position: absolute;
-  width: 100%;
-  left: 0;
-  bottom: -300px; /*모든 font 크기 지정후 위치 조정*/
-  transition: bottom 0.5s;
-  padding:50px 30px 30px;
-  /* 배경이미지 아이콘이 별도로 작업했다면 */
-  /* background:no-repeat url(../img/main/play_circle_FILL0_wght700_GRAD0_opsz48.png)
-  30px 0px; */
-  background:no-repeat url(../img/sprite.png)
-  30px 0px;
-  /* 배경이미지 크기 지정 */
-  /* background-size: 30px 30px; */
-}
-li.service_thumbnail_box .description:hover{
-  bottom: 0px;
-}
-
-li.service_thumbnail_box  .description:after{
+ }
+ /* li.service_thumbnail_box a.thumbnail_dimmed{ */
+ li.service_thumbnail_box a.thumbnail_dimmed{
+   position: relative; /*li.service_thumbnail_box .description*/
+   color:#fff;
+ }
+ 
+ li.service_thumbnail_box a.thumbnail_dimmed:after{
   content: '';
   display: block;
   position: absolute;
-  left: 30px;
-  top: 0px;
-  width: 23px; height: 23px;
-  background-color: #f00;
-  background:no-repeat url(../img/sprite.png); 
-  background-position: -199px -129px;
-  
-}
+  /* 기준요소 li.service_thumbnail_box a */
+  left: 0; top:0 ;
+  width: 100%; height:100%;
+  background-color: rgba(8, 21, 88, 0.5);
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 10;
+ }
 
-li.service_thumbnail_box  .description .title_text{
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-li.service_thumbnail_box  .description .desc_text{
-  font-size: 18px;
-  /* 한줄 말줄임표 */
+ li.service_thumbnail_box:hover a.thumbnail_dimmed:after{
+   opacity: 1;
+  }
+  
+ li.service_thumbnail_box .thumbnail{
+  /* li.service_thumbnail_box 요소에서 마우스아웃 상태일때
+  .thumbnail */
+    width: 100%;
+    transform: scale(1);
+    transition: all 0.5s;
+  }
+ li.service_thumbnail_box:hover .thumbnail{
+     /* li.service_thumbnail_box 요소에서 hover 상태일때
+  .thumbnail */
+   transform: scale(1.2);
+  }
+
+ li.service_thumbnail_box .thumbnail img{
+  max-width: 100%; 
+  /* 원본보다 커지지 말아라 */
+  width: 100%;
+  /* 이미지를 감싸고 있는 요소의 크기를 따라라 */
+  height: auto;
+  /* 이미지 너비가 변경되는 것에 맞게 높이 자동 
+  기존 가로:세로 비율 유지 */
+  }
+ li.service_thumbnail_box .description{
+   position: absolute;
+   z-index: 20;
+   /* 일반흐름제외  */
+   width:100%;  
+   /* 너비 지정하지 않을경우 너비-자식,후손 크기 높이-자식,후손크기 
+       너비를 지정 기준요소의 너비 -기분요소의 너비에서 높이-자식,후손크기
+   */
+   left:0; bottom:-300px;
+   transition: bottom 0.5s;
+  padding:50px 30px 30px;
+  /* 배경이미지 아이콘이 별도로 작업했다면  */
+  /* background:no-repeat url(../img/main/play_circle_FILL0_wght600_GRAD0_opsz48.png) 30px 0px; */
+  
+  /* 배경이미지 크기 지정 */
+  /* background-size:30px 30px; */
+
+  /* sprite 작업되었다면 :after에 주세요 */
+  /* background:no-repeat url(../img/sprite.png) 30px 0px; */
+ }
+ li.service_thumbnail_box:hover .description{
+   bottom:0;
+ }
+
+ li.service_thumbnail_box .description:after{
+  content:'';
+  display: block;
+  position: absolute; 
+  /*기준요소는? li.service_thumbnail_box .description*/
+  left:30px; top:0;
+  width: 23px; height: 23px; /*스프라이트 내 해당아이콘 크기*/
+  background:no-repeat url(../img/sprite.png) ;
+  background-position: -199px -129px;
+  /*스프라이트 내 해당아이콘 위치*/
+ }
+
+ li.service_thumbnail_box  .description .title_text{
+   font-size:28px;
+   margin-bottom:10px;
+ }
+  
+ li.service_thumbnail_box  .description .desc_text{
+  font-size:18px;
+  /*한줄 말줄임표*/
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.main_content .content_support{} */
+
+ /*.main_content .content_support */
+
+ .main_content .content_support{
+  /* .content_support 위에바깥 여백 150px  */
+  margin-top: 150px;
+  /* 인라인요소 또는 텍스트는 가운데 정렬 */
+  text-align: center;
+  
+ }
+/* h3.support_title */
+ .content_support h3.support_title{
+  position: relative;
+  font-size: 32px; color: #333;
+  /*아래여백 20px */
+  margin-bottom: 20px;
+  padding-bottom: 20px ;
+  
+ }
+/* 선을 일부만 그리려고 할때 카페24 스킨 아키테이블 예시 */
+ .content_support h3.support_title:after{
+  content: '';
+  position: absolute;
+  left: 50%; bottom: 0;
+  width: 5rem ; height: 2px;
+  background-color: var(--naver-color);
+  /* x 좌표로 본인 크기의 반이 왼쪽으로 이동 */
+  transform: translatex(-50%);
+ }
+
+ /* h3.support_title p.support_text */
+ .content_support p.support_text{
+  font-size: 18px;
+  line-height: 1.6 ;
+  color: #000;
+ }
+
+ .content_support ul.support_list_container{
+  margin-top: 120px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: start;
+  align-items: stretch;
+
+ }
+ li.support_list_box{
+/* 플렉스 아이템 */
+  /* flex:0 0 25% */
+  /* width: 50%; flex-basis: 50%; 이면 flex container flex-wrap */
+  /* flex-basis: 25%; */
+  width: 25%;
+  box-sizing: border-box;
+  position: relative;
+ }
+
+ .content_support .support_list_box:after{
+  content: '';
+  position: absolute;
+  right: 0;top: 0;
+  width: 1px; height: 100%;
+  background-color: #e5e5e5;
+  }
+
+  .content_support .support_list_box:last-child::after{
+   display: none;
+  }
+
+ /* 아이콘 손가락 모양이 되기위해서  */
+ li.support_list_box a{
+  /* bgi 용 */
+  display: block;
+  padding: 135px 10px 0;
+  position: relative;
+ }
+
+
+
+ li.support_list_box a::after{
+  content: ''; /* support_list_box a::after 자식으로 높이 0 */
+  position: absolute;
+  left: 50%; top: 0;
+  /* x 좌표로 본인 크기의 반 왼쪽으로 이동 */
+  transform: translatex(-50%);
+  background: transparent no-repeat url(../img/sprite.png);
+  height: 100px;
+  /* 높이를 지정하지 않으면 자식의 요소만큼 */
+ }
+
+ li.support_list_box:nth-child(1) a:after{ 
+  width: 87px;
+  background-position: 0 -957px;
+  }
+
+ li.support_list_box:nth-child(2) a:after{
+  width: 101px;
+  background-position: -92px -957px;
+  }
+
+ li.support_list_box:nth-child(3) a:after{
+  width: 110px;
+  background-position: -199px -957px;
+  }
+
+ li.support_list_box:nth-child(4) a:after{
+  width: 93px;
+  background-position: -316px -957px;
+  }
+
+  dl.description{}
+
+  li.support_list_box a .title_text{
+    color: var(--naver-color);
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  li.support_list_box a:hover .title_text{
+   text-decoration: underline;
+  }
+  li.support_list_box dd.desc_text{
+    /* 글자색 검정 */
+    color: #878890;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  li.support_list_box dd.desc_text .text_line{}
+
+
+
+
+
 
 /************ 
 *플러그인

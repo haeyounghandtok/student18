@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>flex 가변크기 정사각형</title>
+  <style>
+    *{margin: 0; padding: 0; box-sizing: border-box;}
+    ul,ol,li{list-style: none;}
+
+    /* a태그에 글자색 밑줄 문자 없는 검정 */
+    a{ color: #000; text-decoration: none;}
+    /* a에 hover 시 밑줄문자 */
+    a:hover{text-decoration: underline;}
+
+    .content_service{
+      width: 80%;
+      margin: 0 auto;
+    
+    }
+
+    /* .service_list_container 3단 flex layout */
+    .service_list_container{
+      display: flex;
+      /* 플렉스 컨테이너 */
+      flex-wrap: wrap;
+      /* 여러줄 3단 */
+    }
+
+    ul.service_list_container li.service_thumbnail_box{
+      /* 기준요소 */
+      position: relative;
+
+      /* 플렉스아이템 */
+      flex-basis: 33.33%; 
+      width: 33.333%;
+      /* 가변크기로 정사각형
+      padding-top 을 width와 동일하게
+      */
+      /* padding-top: 33.33%;     제일 중요 */
+      padding-top: 25%;
+      box-sizing: border-box;
+      background: no-repeat center/cover;
+      overflow: hidden;
+    }
+    ul.service_list_container li.service_thumbnail_box:nth-child(1){
+      background-image: url(../naver/img/main/img_main_content13.png);
+    }
+    ul.service_list_container li.service_thumbnail_box:nth-child(2){
+      background-image: url(../naver/img/main/img_main_content14.png);
+    }
+    ul.service_list_container li.service_thumbnail_box:nth-child(3){
+      background-image: url(../naver/img/main/img_main_content15.png);
+    }
+    ul.service_list_container li.service_thumbnail_box:nth-child(4){
+      background-image: url(../naver/img/main/img_main_content17.png);
+    }
+    ul.service_list_container li.service_thumbnail_box:nth-child(5){
+      background-image: url(../naver/img/main/img_main_content18.png);
+    }
+    ul.service_list_container li.service_thumbnail_box:nth-child(6){
+      background-image: url(../naver/img/main/img_main_content19.png);
+    }
+
+    /* li hover시  검정 dimmed 표시하기 위해
+    li.service_thumbnail_box a.thumbnail_dimmed
+    li.service_thumbnail_box a.thumbnail_dimmed:after
+    li.service_thumbnail_box:hover a.thumbnail_dimmed:after
+    선택자 설정 필요
+    */
+
+    li.service_thumbnail_box a.thumbnail_dimmed{
+      position: absolute;
+      left: 0; top: 0;
+      width: 100%; height: 100%; /* 기준요소랑 사이즈 동일  */
+      display: block;
+      box-sizing: border-box;
+      color: #fff;
+      /* a.thumbnail_dimmed 후손은 모두 color 상속 */
+    }
+
+    /* li에 hover 하면 이미지 위에 어두운 레이어 겹치기
+    li.service_thumbnail_box:hover 하면
+    a.thumbnail_dimmed:after 가 
+    li랑 동일한 크기의 검정색 막이되게
+     */
+    li.service_thumbnail_box a.thumbnail_dimmed:after{
+      /* :before :after 에 스타일 적용하기 위해서는 반드시 content:'' */
+      content: '';
+      position: absolute;
+      /* 기준요소 a.thumbnail_dimmed */
+      left: 0;top: 0;
+      /* 기준요소와 사이즈 동일하게 */
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      opacity:0;
+      transition: all 0.5s;
+      z-index: 10;
+
+    }
+    li.service_thumbnail_box:hover a.thumbnail_dimmed:after{
+      opacity: 1;
+    }
+
+    /* 글자를 왼쪽 아래 */
+    dl.description{
+     position: absolute;
+     left: 0; bottom: -300px;
+     transition: all 0.5s;
+     width: 100%;
+     /* 기준요소의 content크기를 자기 넓이로 가져온다 */
+     box-sizing: border-box;
+     padding: 50px 30px 30px;
+     z-index: 20;
+    }
+    li.service_thumbnail_box:hover dl.description{
+      bottom: 0;
+    }
+
+    dt.title_text{}
+
+    dd.desc_text{
+      width: 100%;
+       /* 한줄 말줄임 */
+       overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+  <!-- .content_service>ul.service_list_container>li.service_thumbnail_box*6>a.thumbnail_dimmed>dl.description>dt.title_text>lorem2^dd.desc_text>lorem7 -->
+  <div class="content_service">
+    <ul class="service_list_container">
+      <li class="service_thumbnail_box">
+        <a href="" class="thumbnail_dimmed">
+          <dl class="description">
+            <dt class="title_text">Lorem, ipsum.</dt>
+            <dd class="desc_text">Lorem ipsum dolor sit amet consectetur adipisicing.</dd>
+          </dl>
+        </a>
+      </li>
+      <li class="service_thumbnail_box">
+        <a href="" class="thumbnail_dimmed">
+          <dl class="description">
+            <dt class="title_text">Tempora, tempore?</dt>
+            <dd class="desc_text">Suscipit sapiente omnis eum, eos quas nihil.</dd>
+          </dl>
+        </a>
+      </li>
+      <li class="service_thumbnail_box">
+        <a href="" class="thumbnail_dimmed">
+          <dl class="description">
+            <dt class="title_text">Non, voluptas?</dt>
+            <dd class="desc_text">Similique perferendis quas qui eos vitae adipisci?</dd>
+          </dl>
+        </a>
+      </li>
+      <li class="service_thumbnail_box">
+        <a href="" class="thumbnail_dimmed">
+          <dl class="description">
+            <dt class="title_text">Minima, voluptates?</dt>
+            <dd class="desc_text">Laudantium, similique explicabo! Dolore eum rerum pariatur!</dd>
+          </dl>
+        </a>
+      </li>
+      <li class="service_thumbnail_box">
+        <a href="" class="thumbnail_dimmed">
+          <dl class="description">
+            <dt class="title_text">Odit, eligendi.</dt>
+            <dd class="desc_text">Et nesciunt voluptas non libero, maxime voluptates!</dd>
+          </dl>
+        </a>
+      </li>
+      <li class="service_thumbnail_box">
+        <a href="" class="thumbnail_dimmed">
+          <dl class="description">
+            <dt class="title_text">Nostrum, eaque.</dt>
+            <dd class="desc_text">Expedita rem animi consequuntur, officia dignissimos omnis.</dd>
+          </dl>
+        </a>
+      </li>
+    </ul>
+    <!--ul.service_list_container  -->
+  </div>
+  <!-- //.content_service -->
+  </div> 
+  <!-- //.wrap -->
+</body>
+</html>
