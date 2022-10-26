@@ -223,17 +223,29 @@ header {
   background-color: rgba(255, 255, 255, 0.7);
 }
 
+.main_content{}
+
+footer{
+  background-color:rgba(0, 0, 0, 0.3);
+}
+
+header .header_wrap,
+footer .footer_wrap{
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+
+/* header */
+
 header .header_wrap {
   display: flex;
   justify-content: space-between;
   /*양끝정렬 여백균등*/
   align-items: center;
   /*교차축 가운데*/
-  margin: 0 auto;
-  max-width: 1600px;
-}
+ }
 
-/* header */
 .header_logo {
   background: url(../img/header_logo.png) center no-repeat;
   width: 87px;
@@ -291,7 +303,7 @@ nav .gnb_menu_list a.gnb_menu_item:focus:after {
   transform: scale(1);
   transition: transform 0.5s;
   transform-origin: 0 0;
-}
+}  
 
 /*모든 depth2서브메뉴.gnb_dropMenu_wrap*/
 nav .gnb_menu_list .gnb_dropMenu_wrap {
@@ -426,6 +438,7 @@ nav .gnb_menu_list:nth-of-type(5) .gnb_dropMenu_wrap {
 }
 
 /* .main_content */
+
 .main_content{
   padding:120px 150px;
 }
@@ -534,7 +547,7 @@ nav .gnb_menu_list:nth-of-type(5) .gnb_dropMenu_wrap {
   letter-spacing: -1.7px;
   border-bottom:1px solid #000;
 }
-/*"원"의 글자크기 12ppx*/
+/*"원"의 글자크기 12px*/
 .content_summary .stock1 .price .unit{
   font-size: 12px;
 }
@@ -797,6 +810,23 @@ nav .gnb_menu_list:nth-of-type(5) .gnb_dropMenu_wrap {
     font-size: 15px;
   }
   li.support_list_box dd.desc_text .text_line{}
+
+
+  /* footer */
+
+  footer{}
+  footer .footer_wrap{
+    display: flex;
+  }
+  footer .footer_wrap .flex_item{
+    width: 25%;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #000;
+  }
+
+
+
 
 
 
